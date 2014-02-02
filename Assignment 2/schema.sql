@@ -1,0 +1,138 @@
+PRAGMA foreign_keys = ON;
+-- Create tables
+CREATE TABLE Developer(
+    id INTEGER NOT NULL,
+    name VARCHAR(55) NOT NULL,
+    PRIMARY KEY(id)
+);
+CREATE TABLE Role(
+    id INTEGER NOT NULL,
+    type VARCHAR(55) NOT NULL,
+    devel_id INTEGER NOT NULL,
+    app_id INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(devel_id) REFERENCES Developer(id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(app_id) REFERENCES Application(id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+    UNIQUE(devel_id, app_id)
+);
+
+CREATE TABLE Application(
+    id INTEGER NOT NULL,
+    name VARCHAR(55) NOT NULL,
+    created DATE,
+    price DOUBLE,
+    PRIMARY KEY(id)
+);
+CREATE TABLE WebApplication(
+    id INTEGER NOT NULL,
+    app_id INTEGER NOT NULL,
+    url VARCHAR(200) NOT NULL,
+    targetbrowser VARCHAR(55),
+    PRIMARY KEY(id),
+    FOREIGN KEY(app_id) REFERENCES Application(id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE MobileApplication(
+    id INTEGER NOT NULL,
+    app_id INTEGER NOT NULL,
+    targetos VARCHAR(55),
+    installs INTEGER DEFAULT 0,
+    PRIMARY KEY(id),
+    FOREIGN KEY(app_id) REFERENCES Application(id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE DesktopApplication(
+    id INTEGER NOT NULL,
+    app_id INTEGER NOT NULL,
+    targetos VARCHAR(55),
+    PRIMARY KEY(id),
+    FOREIGN KEY(app_id) REFERENCES Application(id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+
+CREATE TABLE Controller(
+    id INTEGER NOT NULL,
+    app_id INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(app_id) REFERENCES Application(id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE Script(
+    id INTEGER NOT NULL,
+    controller_id INTEGER NOT NULL,
+    model_id INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(controller_id) REFERENCES Controller(id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(model_id) REFERENCES Model(id)
+);
+
+CREATE TABLE View(
+    id INTEGER NOT NULL,
+    app_id INTEGER NOT NULL,
+    superview_id INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(app_id) REFERENCES Application(id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(superview_id) REFERENCES View(id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE EventHandler(
+    id INTEGER NOT NULL,
+    view_id INTEGER NOT NULL,
+    script_id INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(view_id) REFERENCES View(id)
+    ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY(script_id) REFERENCES Script(id)
+);
+
+CREATE TABLE Model(
+    id INTEGER NOT NULL,
+    app_id INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(app_id) REFERENCES Application(id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE NameValuePair(
+    id INTEGER NOT NULL,
+    model_id INTEGER NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(model_id) REFERENCES Model(id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE StringNVP(
+    id INTEGER NOT NULL,
+    nvp_id INTEGER NOT NULL,
+    value VARCHAR(255) NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(nvp_id) REFERENCES NameValuePair(id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE NumberNVP(
+    id INTEGER NOT NULL,
+    nvp_id INTEGER NOT NULL,
+    value INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(nvp_id) REFERENCES NameValuePair(id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE DateNVP(
+    id INTEGER NOT NULL,
+    nvp_id INTEGER NOT NULL,
+    value DATE NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(nvp_id) REFERENCES NameValuePair(id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+);
+CREATE TABLE NameValueNVP(
+    id INTEGER NOT NULL,
+    nvp_id INTEGER NOT NULL,
+    value INTEGER NOT NULL,
+    PRIMARY KEY(id),
+    FOREIGN KEY(nvp_id) REFERENCES NameValuePair(id)
+    ON DELETE CASCADE ON UPDATE CASCADE
+);

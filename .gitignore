@@ -1,2 +1,4 @@
 *.pdf
 *.dia~
+!*.sql
+*.db

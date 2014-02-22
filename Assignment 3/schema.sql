@@ -1,5 +1,17 @@
+DROP TABLE IF EXISTS Privilege;
+DROP TABLE IF EXISTS AssetType;
+DROP TABLE IF EXISTS Role;
+DROP TABLE IF EXISTS RoleType;
+DROP TABLE IF EXISTS MobileApplication;
+DROP TABLE IF EXISTS WebApplication;
+DROP TABLE IF EXISTS DesktopApplication;
+DROP TABLE IF EXISTS Developer;
+DROP TABLE IF EXISTS Application;
+DROP TABLE IF EXISTS ApplicationCategory;
+DROP TABLE IF EXISTS PrivilegeEnum;
+
 CREATE TABLE Developer (
-    Id        INT          IDENTITY (1, 1) NOT NULL,
+    Id        INT          AUTO_INCREMENT NOT NULL,
     firstName VARCHAR (50) NULL,
     lastName  VARCHAR (50) NULL,
     PRIMARY KEY (Id ASC)
@@ -7,16 +19,16 @@ CREATE TABLE Developer (
 
 CREATE TABLE ApplicationCategory (
     category VARCHAR (25) NOT NULL,
-    PRIMARY KEY (category ASC)
+    PRIMARY KEY (category)
 );
 
-INSERT INTO ApplicationCategory (category) VALUES ('GAMES')
-INSERT INTO ApplicationCategory (category) VALUES ('PRODUCTIVITY')
+INSERT INTO ApplicationCategory (category) VALUES ('GAMES');
+INSERT INTO ApplicationCategory (category) VALUES ('PRODUCTIVITY');
 
 CREATE TABLE Application (
-    Id       INT          IDENTITY (1, 1) NOT NULL,
-    name     VARCHAR (50) DEFAULT ('Application') NULL,
-    created  DATE         DEFAULT (getdate()) NULL,
+    Id       INT          AUTO_INCREMENT NOT NULL,
+    name     VARCHAR (50) DEFAULT 'Application',
+    created  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     category VARCHAR (25) NULL,
     PRIMARY KEY (Id ASC),
     FOREIGN KEY (category) REFERENCES ApplicationCategory (category)
@@ -42,8 +54,8 @@ CREATE TABLE DesktopApplication (
 
 CREATE TABLE WebApplication (
     Id      INT           NOT NULL,
-    url     VARCHAR (100) DEFAULT ('http://cnn.com') NULL,
-    price   FLOAT (53)    DEFAULT ((0.99)) NULL,
+    url     VARCHAR (100) DEFAULT 'http://cnn.com' NULL,
+    price   FLOAT (53)    DEFAULT 0.99 NULL,
     subscribers INT NULL,
     browser VARCHAR (50)  NULL,
     PRIMARY KEY (Id ASC),
@@ -64,16 +76,16 @@ CREATE TABLE RoleType (
     PRIMARY KEY (type ASC)
 );
 
-INSERT INTO RoleType (type) VALUES ('ARCHITECT')
-INSERT INTO RoleType (type) VALUES ('BUSINESS ANALYST')
-INSERT INTO RoleType (type) VALUES ('DEVELOPER')
-INSERT INTO RoleType (type) VALUES ('PROJECT MANAGER')
-INSERT INTO RoleType (type) VALUES ('PRODUCT MANAGER')
-INSERT INTO RoleType (type) VALUES ('USER EXPERIENCE')
-INSERT INTO RoleType (type) VALUES ('DIRECTOR')
+INSERT INTO RoleType (type) VALUES ('ARCHITECT');
+INSERT INTO RoleType (type) VALUES ('BUSINESS ANALYST');
+INSERT INTO RoleType (type) VALUES ('DEVELOPER');
+INSERT INTO RoleType (type) VALUES ('PROJECT MANAGER');
+INSERT INTO RoleType (type) VALUES ('PRODUCT MANAGER');
+INSERT INTO RoleType (type) VALUES ('USER EXPERIENCE');
+INSERT INTO RoleType (type) VALUES ('DIRECTOR');
 
 CREATE TABLE Role (
-    Id          INT          IDENTITY (1, 1) NOT NULL,
+    Id          INT          AUTO_INCREMENT NOT NULL,
     application INT          NULL,
     developer   INT          NULL,
     role        VARCHAR (50) NULL,
@@ -89,26 +101,26 @@ CREATE TABLE PrivilegeEnum (
     PRIMARY KEY (privilege ASC)
 );
 
-INSERT INTO PrivilegeEnum (privilege) VALUES ('ALL')
-INSERT INTO PrivilegeEnum (privilege) VALUES ('CREATE')
-INSERT INTO PrivilegeEnum (privilege) VALUES ('DELETE')
-INSERT INTO PrivilegeEnum (privilege) VALUES ('READ')
-INSERT INTO PrivilegeEnum (privilege) VALUES ('UPDATE')
+INSERT INTO PrivilegeEnum (privilege) VALUES ('ALL');
+INSERT INTO PrivilegeEnum (privilege) VALUES ('CREATE');
+INSERT INTO PrivilegeEnum (privilege) VALUES ('DELETE');
+INSERT INTO PrivilegeEnum (privilege) VALUES ('READ');
+INSERT INTO PrivilegeEnum (privilege) VALUES ('UPDATE');
 
 CREATE TABLE AssetType (
     type VARCHAR (20) NOT NULL,
     PRIMARY KEY (type ASC)
 );
 
-INSERT INTO AssetType (type) VALUES ('APPLICATION')
-INSERT INTO AssetType (type) VALUES ('DATA')
-INSERT INTO AssetType (type) VALUES ('MODEL')
-INSERT INTO AssetType (type) VALUES ('LOGIC')
-INSERT INTO AssetType (type) VALUES ('PAGE')
-INSERT INTO AssetType (type) VALUES ('PRESENTATION')
-INSERT INTO AssetType (type) VALUES ('SCRIPT')
-INSERT INTO AssetType (type) VALUES ('CONTROLLER')
-INSERT INTO AssetType (type) VALUES ('VIEW')
+INSERT INTO AssetType (type) VALUES ('APPLICATION');
+INSERT INTO AssetType (type) VALUES ('DATA');
+INSERT INTO AssetType (type) VALUES ('MODEL');
+INSERT INTO AssetType (type) VALUES ('LOGIC');
+INSERT INTO AssetType (type) VALUES ('PAGE');
+INSERT INTO AssetType (type) VALUES ('PRESENTATION');
+INSERT INTO AssetType (type) VALUES ('SCRIPT');
+INSERT INTO AssetType (type) VALUES ('CONTROLLER');
+INSERT INTO AssetType (type) VALUES ('VIEW');
 
 CREATE TABLE Privilege (
     applicationId INT          NULL,

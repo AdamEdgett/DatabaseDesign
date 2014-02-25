@@ -28,7 +28,8 @@ INSERT INTO ApplicationCategory (category) VALUES ('PRODUCTIVITY');
 CREATE TABLE Application (
     Id       INT          AUTO_INCREMENT NOT NULL,
     name     VARCHAR (50) DEFAULT 'Application',
-    created  TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    -- Changed from DATETIME to TIMESTAMP to work with mysql 5.5
+    created  TIMESTAMP         DEFAULT CURRENT_TIMESTAMP,
     category VARCHAR (25) NULL,
     PRIMARY KEY (Id ASC),
     FOREIGN KEY (category) REFERENCES ApplicationCategory (category)
@@ -131,4 +132,11 @@ CREATE TABLE Privilege (
     FOREIGN KEY (developerId) REFERENCES Developer (Id),
     FOREIGN KEY (privilege) REFERENCES PrivilegeEnum (privilege),
     FOREIGN KEY (assetType) REFERENCES AssetType (type)
+);
+
+CREATE TABLE Asset (
+    ID int PRIMARY KEY,
+    name VARCHAR(50) NOT NULL,
+    type VARCHAR(20) references AssetType(type),
+    applicationID int references Application (Id)
 );

@@ -1,14 +1,16 @@
 DROP TABLE IF EXISTS Privilege;
 DROP TABLE IF EXISTS AssetType;
+DROP TABLE IF EXISTS Sales;
 DROP TABLE IF EXISTS Role;
 DROP TABLE IF EXISTS RoleType;
+DROP TABLE IF EXISTS PrivilegeEnum;
 DROP TABLE IF EXISTS MobileApplication;
 DROP TABLE IF EXISTS WebApplication;
 DROP TABLE IF EXISTS DesktopApplication;
-DROP TABLE IF EXISTS Developer;
+DROP TABLE IF EXISTS Asset;
 DROP TABLE IF EXISTS Application;
 DROP TABLE IF EXISTS ApplicationCategory;
-DROP TABLE IF EXISTS PrivilegeEnum;
+DROP TABLE IF EXISTS Developer;
 
 CREATE TABLE Developer (
     Id        INT          AUTO_INCREMENT NOT NULL,
@@ -125,7 +127,7 @@ INSERT INTO AssetType (type) VALUES ('VIEW');
 
 CREATE TABLE Privilege (
     applicationId INT          NULL,
-    developerId  INT          NULL,
+    developerId   INT          NULL,
     privilege     VARCHAR (20) NULL,
     assetType     VARCHAR (20) NULL,
     FOREIGN KEY (applicationId) REFERENCES Application (Id),
@@ -135,8 +137,8 @@ CREATE TABLE Privilege (
 );
 
 CREATE TABLE Asset (
-    ID int PRIMARY KEY,
-    name VARCHAR(50) NOT NULL,
-    type VARCHAR(20) references AssetType(type),
-    applicationID int references Application (Id)
+    Id              INT         PRIMARY KEY,
+    name            VARCHAR(50) NOT NULL,
+    type            VARCHAR(20) REFERENCES AssetType(type),
+    applicationID   INT REFERENCES Application (Id)
 );

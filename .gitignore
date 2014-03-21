@@ -1,5 +1,12 @@
+# IDE files
+*.idea/
+*.iml
+
+# Documents
 *.docx
 *.pdf
+
+# Database files
 *.dia~
 !*.sql
 *.db

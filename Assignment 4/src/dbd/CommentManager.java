@@ -41,7 +41,7 @@ public class CommentManager {
         try {
             connection = ds.getConnection();
             statement = connection.prepareStatement(createComment);
-            statement.setObject(1, newComment);
+            statement.setObject(1, newComment.getId());
             statement.setString(2, newComment.getComment());
             statement.setDate(3, new Date(newComment.getDate().getTime()));
             statement.setString(4, newComment.getUsername());

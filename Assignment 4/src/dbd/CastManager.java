@@ -20,7 +20,7 @@ public class CastManager {
     PreparedStatement statement = null;
     ResultSet results = null;
 
-    String createCast = "INSERT INTO Cast (id, characterName, movieId, actorId) VALUES (?, ?, ?, ?)";
+    String createCast = "INSERT INTO `Cast` (id, characterName, movieId, actorId) VALUES (?,?,?,?)";
     String readAllCast = "SELECT * FROM Cast";
     String readAllCastForActor = "SELECT * FROM Cast WHERE actorId=?";
     String readAllCastForMovie = "SELECT * FROM Cast WHERE movieId=?";
@@ -41,7 +41,7 @@ public class CastManager {
         try {
             connection = ds.getConnection();
             statement = connection.prepareStatement(createCast);
-            statement.setObject(1, newCast);
+            statement.setObject(1, newCast.getId());
             statement.setString(2, newCast.getCharacterName());
             statement.setInt(3, newCast.getMovieId());
             statement.setInt(4, newCast.getActorId());

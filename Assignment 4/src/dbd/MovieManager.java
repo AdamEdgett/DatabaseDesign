@@ -20,8 +20,7 @@ public class MovieManager {
     PreparedStatement statement = null;
     ResultSet results = null;
 
-    String createMovie = "INSERT INTO Movie" +
-            "(id, title, posterImage, releaseDate) VALUES (?, ?, ?, ?)";
+    String createMovie = "INSERT INTO Movie (id, title, posterImage, releaseDate) VALUES (?, ?, ?, ?)";
     String readAllMovies = "SELECT * FROM Movie";
     String readMovie = "SELECT * FROM Movie WHERE id = ?";
     String updateMovie = "UPDATE Movie SET id=?, title=?, posterImage=?, releaseDate=? WHERE id=?";
@@ -40,7 +39,7 @@ public class MovieManager {
         try {
             connection = ds.getConnection();
             statement = connection.prepareStatement(createMovie);
-            statement.setObject(1, newMovie);
+            statement.setObject(1, newMovie.getId());
             statement.setString(2, newMovie.getTitle());
             statement.setString(3, newMovie.getPosterImage());
             statement.setDate(4, new Date(newMovie.getReleaseDate().getTime()));

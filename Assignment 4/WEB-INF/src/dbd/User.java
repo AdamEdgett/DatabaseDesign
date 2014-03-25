@@ -3,7 +3,6 @@ package dbd;
 import java.util.Date;
 
 public class User {
-    Integer id;
     String username;
     String password;
     String firstName;
@@ -13,23 +12,14 @@ public class User {
 
     public User() {}
 
-    public User(Integer id, String username, String password, String firstName,
+    public User(String username, String password, String firstName,
                 String lastName, String email, Date dateOfBirth) {
-        this.id = id;
         this.username = username;
         this.password = password;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.dateOfBirth = dateOfBirth;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getUsername() {

@@ -6,14 +6,17 @@ public class Comment {
     Integer id;
     String comment;
     Date date;
-    Integer userId;
+    String username;
+    Integer movieId;
 
     public Comment() {}
-    public Comment(Integer id, String comment, Date date, Integer userId) {
+    public Comment(Integer id, String comment, Date date,
+                   String username, Integer movieId) {
         this.id = id;
         this.comment = comment;
         this.date = date;
-        this.userId = userId;
+        this.username = username;
+        this.movieId = movieId;
     }
 
     public Integer getId() {
@@ -40,11 +43,15 @@ public class Comment {
         this.date = date;
     }
 
-    public Integer getUserId() {
-        return userId;
+    public String getUsername() {
+        return username;
     }
 
-    public void setUserId(Integer userId) {
-        this.userId = userId;
+    public void setUsername(String username) {
+        this.username = username;
     }
+
+    public Integer getMovieId() { return movieId; }
+
+    public void setMovieId(Integer movieId) { this.movieId = movieId; }
 }

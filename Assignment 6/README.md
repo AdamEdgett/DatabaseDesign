@@ -20,3 +20,7 @@ Assignment
   5. main()
     1. Use findAllSites() to retrieve all the sites from the database
     2. Use exportSiteDatabaseToXmlFile() to export the site to a file called "xml/sites.xml"
+
+5. Write the following XSLT files
+  1. sites2html.xslt
+  2. sites2equipment.xslt

@@ -1,4 +1,4 @@
-Assignment
+JDBC
 ==========
 
 ### Given the relational model, write statements that will accomplish the following using jdbc:

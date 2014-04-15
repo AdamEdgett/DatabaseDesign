@@ -1,4 +1,4 @@
-Assignment
+SQL
 ==========
 
 ### Create a UML class diagram for the online web application described below

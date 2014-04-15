@@ -1,4 +1,4 @@
-Assignment
+UML
 ==========
 
 ### Create a UML class diagram for the CMS described below

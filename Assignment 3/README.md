@@ -1,4 +1,4 @@
-Assignment
+Advanced SQL
 ==========
 
 ### Given the relational model (schema.sql), write SQL statements that will accomplish the following (data.sql):

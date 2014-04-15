@@ -1,4 +1,4 @@
-Assignment
+XML/XSLT
 ==========
 
 ### Given the relational model (schema.sql), create an application that will export a database content into an XML document, and then transforms it into different HTML and XML documents:
